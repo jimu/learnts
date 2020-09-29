@@ -1,0 +1,22 @@
+{
+  "name": "pod",
+  "version": "0.0.1",
+  "description": "Learn Typescript - Pod class",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "tsc": "tsc"
+  },
+  "keywords": [
+    "learnts",
+    "typescript"
+  ],
+  "author": "Jim Urbas",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.0.3"
+  },
+  "devDependencies": {
+    "jest": "^26.4.2"
+  }
+}
