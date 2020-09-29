@@ -1,24 +1,18 @@
 // Usage:
 //
-//  var pod : Pod = new Pod(Pod.Type.Laser);
+//  var pod : Pod = new Pod(Pod.Laser);
 //
 //  console.log(pod)
 //
 //    "Laser"
 //
-//  console.log(Pod.toString(Pod.Type.Laser))
+//  console.log(Pod.toString(Pod.Laser))
 //
 //    "Laser"
 //
 //  console.log(1)
 //
 //    "Laser"
-//
-// Notes:
-//
-//    * Uses Namespace Merging (for enum Pod.Type)
-//
-//      https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-namespaces-with-classes
 //
 
 /**
@@ -28,13 +22,13 @@ class Pod {
   /** the type of active or destroyed pod */
   type: number;
 
-  constructor(type: number) {
+  private constructor(type: number) {
     this.type = type;
   }
 
-  _signaturePod() : void {}
+  private _signaturePod() : void {}
 
-  toString(): string {
+  public toString(): string {
     return this.type <= 100 ? Pod.TypeNames[this.type] : Pod.DestroyedTypeNames[this.type - 100];
   }
 
@@ -44,7 +38,7 @@ class Pod {
    * @param pod type
    * @return name
    */
-  static toString(type: number): string {
+  public static toString(type: number): string {
     return type <= 100 ? Pod.TypeNames[type] : Pod.DestroyedTypeNames[type - 100];
   }
 
@@ -53,7 +47,7 @@ class Pod {
    * @param pod-type
    * @return pod-type (destroyed)
    */
-  static destroy(type: number): number {
+  public static destroy(type: number): number {
     return type + 100;
   }
 
@@ -66,23 +60,17 @@ class Pod {
     return type > 0 && type < 100;
   }
 
-  public static readonly Laser: number = 1;
+  public static readonly Invalid: number = 0;
+  public static readonly Laser:   number = 1;
+  public static readonly Cabin:   number = 2;
+  public static readonly Cargo:   number = 3;
+  public static readonly DestroyedLaser: number = 101;
+  public static readonly DestroyedCabin: number = 102;
+  public static readonly DestroyedCargo: number = 103;
   private static TypeNames:          string[] = ["Invalid", "Laser", "Cabin", "Cargo"];
   private static DestroyedTypeNames: string[] = ["Invalid", "Destroyed Laser", "Destroyed Cabin", "Destroyed Cargo"];
 };
 
-
-namespace Pod {
-export enum Type {
-  Invalid = 0,
-  Laser = 1,
-  Cabin,
-  Cargo,
-  DestroyedLaser = 101,
-  DestroyedCabin,
-  DestroyedCargo,
-}
-}
-export default Pod;
+//type PodType = Pod.Invalid | Pod.Laser | Pod.Cabin | Pod.Cargo | Pod.DestroyedLaser | Pod.DestroyedCabin | Pod.DestroytedCargo;
 
 module.exports = [Pod];

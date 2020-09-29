@@ -1,13 +1,13 @@
 "use strict";
 // Usage:
 //
-//  var pod : Pod = new Pod(Pod.Type.Laser);
+//  var pod : Pod = new Pod(Pod.Laser);
 //
 //  console.log(pod)
 //
 //    "Laser"
 //
-//  console.log(Pod.toString(Pod.Type.Laser))
+//  console.log(Pod.toString(Pod.Laser))
 //
 //    "Laser"
 //
@@ -15,13 +15,6 @@
 //
 //    "Laser"
 //
-// Notes:
-//
-//    * Uses Namespace Merging (for enum Pod.Type)
-//
-//      https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-namespaces-with-classes
-//
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Represents an active or destroyed ship pod
  */
@@ -58,23 +51,17 @@ var Pod = /** @class */ (function () {
     Pod.okay = function (type) {
         return type > 0 && type < 100;
     };
+    Pod.Invalid = 0;
     Pod.Laser = 1;
+    Pod.Cabin = 2;
+    Pod.Cargo = 3;
+    Pod.DestroyedLaser = 101;
+    Pod.DestroyedCabin = 102;
+    Pod.DestroyedCargo = 103;
     Pod.TypeNames = ["Invalid", "Laser", "Cabin", "Cargo"];
     Pod.DestroyedTypeNames = ["Invalid", "Destroyed Laser", "Destroyed Cabin", "Destroyed Cargo"];
     return Pod;
 }());
 ;
-(function (Pod) {
-    var Type;
-    (function (Type) {
-        Type[Type["Invalid"] = 0] = "Invalid";
-        Type[Type["Laser"] = 1] = "Laser";
-        Type[Type["Cabin"] = 2] = "Cabin";
-        Type[Type["Cargo"] = 3] = "Cargo";
-        Type[Type["DestroyedLaser"] = 101] = "DestroyedLaser";
-        Type[Type["DestroyedCabin"] = 102] = "DestroyedCabin";
-        Type[Type["DestroyedCargo"] = 103] = "DestroyedCargo";
-    })(Type = Pod.Type || (Pod.Type = {}));
-})(Pod || (Pod = {}));
-exports.default = Pod;
+//type PodType = Pod.Invalid | Pod.Laser | Pod.Cabin | Pod.Cargo | Pod.DestroyedLaser | Pod.DestroyedCabin | Pod.DestroytedCargo;
 module.exports = [Pod];
